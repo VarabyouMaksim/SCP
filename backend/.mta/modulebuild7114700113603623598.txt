@@ -1,0 +1,90 @@
+
+> deploy@ postinstall /home/maxim/Documents/HiMTA_03/backend/db
+> node .build.js
+
+npm WARN pt_backend@1.0.0 license should be a valid SPDX license expression
+
+audited 259 packages in 2.352s
+found 0 vulnerabilities
+
+
+> pt_backend@1.0.0 build /home/maxim/Documents/HiMTA_03/backend
+> cds build/all --clean
+
+
+[cds] - cds [3.21.0], compiler [1.21.1], home [/home/maxim/Documents/HiMTA_03/backend/node_modules/@sap/cds]
+
+[cds] - Determining CDS build tasks from CDS configuration - applying defaults
+[cds] - Determining database kind.
+[cds] - Found HANA database.
+[cds] - Determining implementation technology
+[cds] - Found implementation technology node
+[cds] - Determining fiori modules - matching modules */webapp/manifest.json
+[cds] - Found fiori app paths []
+[cds] - Determining single or multi-tenant strategy.
+[cds] - Found single-tenant app - skipping mtx build task
+[cds] - No CDS custom build tasks defined for project [/home/maxim/Documents/HiMTA_03/backend].
+[cds] - The following build tasks have been auto-created and will be executed.
+[cds] - You may want to add them to .cdsrc.json or package.json of your project and customize to your needs if required.
+{
+  "build": {
+    "target": "gen",
+    "tasks": [
+      {"src":"db","for":"hana","options":{"model":["db","srv"]}},
+      {"src":"srv","for":"node-cf","options":{"model":["db","srv"]}}
+    ]
+  }
+}
+
+[cds] - building project [/home/maxim/Documents/HiMTA_03/backend], clean [true]
+
+[cds] - building module [db] using [Hana DB Module Builder]
+[cds] - model: db/ExtraInfo.cds, db/User.cds, srv/UserService.cds
+
+[cds] - building module [srv] using [Node CF Module Builder]
+[WARNING] odata.version = 'v2' not supported by node runtime, define odata.version = 'v4' in package.json instead
+[cds] - model: db/ExtraInfo.cds, db/User.cds, srv/UserService.cds
+[cds] - time: 2.160s
+
+[ERROR] srv/UserService.cds:2:42-62: Cannot find local module '../db/Refrigerator'
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! pt_backend@1.0.0 build: `cds build/all --clean`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the pt_backend@1.0.0 build script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/maxim/.npm/_logs/2019-12-30T10_24_09_061Z-debug.log
+child_process.js:649
+    throw err;
+    ^
+
+Error: Command failed: npm install && npm run build
+    at checkExecSyncError (child_process.js:610:11)
+    at Object.execSync (child_process.js:646:15)
+    at Object.<anonymous> (/home/maxim/Documents/HiMTA_03/backend/db/.build.js:12:15)
+    at Module._compile (internal/modules/cjs/loader.js:1139:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1159:10)
+    at Module.load (internal/modules/cjs/loader.js:988:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:896:14)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+    at internal/main/run_main_module.js:17:47 {
+  status: 1,
+  signal: null,
+  output: [ null, null, null ],
+  pid: 2614,
+  stdout: null,
+  stderr: null
+}
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! deploy@ postinstall: `node .build.js`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the deploy@ postinstall script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/maxim/.npm/_logs/2019-12-30T10_24_09_154Z-debug.log
