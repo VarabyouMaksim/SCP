@@ -1,0 +1,6 @@
+---
+spring:
+  datasource:
+    url: "jdbc:sqlite:file:local.db?cache=shared"
+    driverClassName: org.sqlite.JDBC
+    initialization-mode: never
