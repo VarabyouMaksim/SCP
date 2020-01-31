@@ -11,6 +11,7 @@ target/
 
 node/
 node_modules/
+default-env.json
 
 .mta/
 *.mtar

@@ -1,0 +1,92 @@
+_schema-version: 2.0.0
+ID: refrigs
+version: 1.0.0
+
+modules:
+
+  - name: approuter
+    type: approuter.nodejs
+    path: approuter
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: refrig-router
+      - name: refrig-connectivity
+      - name: refrig-destination
+      - name: refrig-uaa
+      - name: srv
+        group: destinations
+        properties:
+          name: srv
+          url: "~{url}"
+          forwardAuthToken: true
+
+  - name: db
+    type: hdb
+    path: db
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: refrig-hdi
+    provides:
+      - name: db
+      
+  - name: srv
+    type: java
+    path: srv
+    properties:
+      SPRING_PROFILES_ACTIVE: cloud
+      db_service_instance_name: refrig-hdi
+    build-parameters:
+      build-result: target/*.jar
+    parameters:
+      memory: 1024M
+      disk-quota: 1024M
+    provides:
+      - name: srv
+        properties:
+          url: ${default-url}
+    requires:
+      - name: db
+      - name: refrig-hdi
+      - name: refrig-uaa
+      - name: refrig-destination
+      - name: refrig-connectivity
+
+resources:
+
+  - name: refrig-router
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+
+  - name: refrig-connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
+
+  - name: refrig-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+        
+  - name: refrig-hdi
+    type: com.sap.xs.hdi-container
+    parameters:
+      service-plan: hdi-shared
+      service: hanatrial
+      config: { schema: REFRIG_SAMPLE_SCP }
+    properties:
+      hdi-container-name: ${service-name}
+
+  - name: refrig-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa

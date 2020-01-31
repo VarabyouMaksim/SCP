@@ -38,5 +38,18 @@ public class ShelfRepositoryImpl implements ShelfRepository {
 		persistenceService.run(query);
 	}
 
+	@Override
+	public List<Shelf> runSelect(CqnSelect query) {
+		System.out.println(query);
+		System.out.println(persistenceService);
+		return persistenceService.run(query).listOf(Shelf.class);
+	}
+
+	@Override
+	public List<Shelf> getShelfByType(List<String> typeList) {
+		CqnSelect query = Select.from(Shelf_.class).where(shelf -> shelf.type().in(typeList.stream().toArray(String[]::new)));
+		return persistenceService.run(query).listOf(Shelf.class);
+	}
+
 	
 }

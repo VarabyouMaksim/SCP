@@ -10,6 +10,9 @@ service ShelfService {
         Deletable  : true
     }
     entity Shelf as projection on data.Shelf 
+    actions {
+        action inspect(inspected: Boolean);
+    }
     
     @Capabilities : {
         Insertable : true,
@@ -20,5 +23,7 @@ service ShelfService {
     actions {
     	function shelfOwned() returns Integer;
     };
+
+    function hasUninspectedShelf(refrigeratorId: String) returns Boolean;
     
 }

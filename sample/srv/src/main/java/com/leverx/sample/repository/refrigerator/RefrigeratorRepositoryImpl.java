@@ -54,4 +54,20 @@ public class RefrigeratorRepositoryImpl implements RefrigeratorRepository {
 		return persistenceService.run(query).single().as(Refrigerator.class);
 	}
 
+	@Override
+	public List<Refrigerator> runSelect(CqnSelect query) {
+		return persistenceService.run(query).listOf(Refrigerator.class);
+	}
+
+	@Override
+	public List<Shelf> getUninspectedShelf(String id) {
+		CqnSelect query = Select.from(Shelf_.class).byId(id).where(shelf -> shelf.inspected().eq(false));
+		return persistenceService.run(query).listOf(Shelf.class);
+	}
+
+	@Override
+	public Refrigerator runSelectSingle(CqnSelect query) {
+		return persistenceService.run(query).single().as(Refrigerator.class);
+	}
+
 }

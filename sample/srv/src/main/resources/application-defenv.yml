@@ -1,0 +1,10 @@
+---
+spring:
+  datasource:
+    url:             jdbc:sap://zeus.hana.prod.eu-central-1.whitney.dbaas.ondemand.com:23803?encrypt=true&validateCertificate=true&currentschema=REFRIG_SAMPLE_SCP
+    username:        REFRIG_SAMPLE_SCP_2M7TKIJJDU4BO2EA6YKCSZ4LO_RT
+    password:        Jo3A5sM95b_KGQmxRiTIAmNUdO7fQtkdP2rkU2xbIzU5lSqrP_p3EUNKMmwXKNr0af2gHkbIjzyjFC3pBqXybJwyeoAU4xqrf1699oSZC6VYrzWfp_f2Hw8jbGxBwIQb
+    driverClassName: com.sap.db.jdbc.Driver
+    type:            com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximumPoolSize: 10

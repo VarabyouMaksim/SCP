@@ -12,6 +12,9 @@
         "clean": "mvn clean",
         "local-run": "npm run build-local && npm run start-server",
         "build-cloud": "mvn clean && npm run build && mvn install",
+        "hana-run": "mvn spring-boot:run -Dspring-boot.run.profiles=defenv",
+        "sqlite-run": "mvn spring-boot:run",
+        "test": "mvn surefire:test",
         "build-local": "mvn clean && npm run build && npm run schema && mvn install"
     },
     "dependencies": {
@@ -28,6 +31,9 @@
                     "db",
                     "srv"
                 ]
+            },
+            "uaa": {
+                "kind": "xsuaa"
             }
         },
         "odata": {
